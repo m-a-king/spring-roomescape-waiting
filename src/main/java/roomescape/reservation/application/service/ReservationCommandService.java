@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import roomescape.common.domain.DomainTerm;
 import roomescape.common.exception.DuplicateException;
 import roomescape.common.time.TimeProvider;
+import roomescape.reservation.domain.BookedStatus;
 import roomescape.reservation.domain.Reservation;
 import roomescape.reservation.domain.ReservationId;
 import roomescape.reservation.domain.ReservationRepository;
@@ -41,10 +42,12 @@ public class ReservationCommandService {
     public void delete(final Reservation reservation) {
         reservationRepository.deleteById(reservation.getId());
 
-        reservationRepository.findNextBySlotAndCreatedAt(
-                        reservation.getSlot(),
-                        reservation.getCreatedAt())
-                .ifPresent(Reservation::approved);
+        if (reservation.getStatus() == BookedStatus.APPROVED) {
+            reservationRepository.findNextBySlotAndCreatedAt(
+                            reservation.getSlot(),
+                            reservation.getCreatedAt())
+                    .ifPresent(Reservation::approved);
+        }
     }
 
     public void delete(final ReservationId id) {

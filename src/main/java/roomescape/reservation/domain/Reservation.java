@@ -127,7 +127,14 @@ public class Reservation extends BaseEntity {
         }
     }
 
+    public boolean isApproved() {
+        return this.status == BookedStatus.APPROVED;
+    }
+
     public void approved() {
+        if (isApproved()) {
+            throw new IllegalStateException("This reservation has already been approved");
+        }
         this.status = BookedStatus.APPROVED;
     }
 

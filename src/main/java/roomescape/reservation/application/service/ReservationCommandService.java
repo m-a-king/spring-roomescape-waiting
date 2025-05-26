@@ -42,7 +42,7 @@ public class ReservationCommandService {
     public void delete(final Reservation reservation) {
         reservationRepository.deleteById(reservation.getId());
 
-        if (reservation.getStatus() == BookedStatus.APPROVED) {
+        if (reservation.isApproved()) {
             reservationRepository.findNextBySlotAndCreatedAt(
                             reservation.getSlot(),
                             reservation.getCreatedAt())

@@ -32,4 +32,24 @@ class TokenTypeTest {
         // then
         assertThat(periodInSeconds).isEqualTo(1800);
     }
+
+    @Test
+    @DisplayName("DELETE 토큰의 기간이 밀리초 단위로 반환된다")
+    void deleteTokenPeriodIsReturnedInMillis() {
+        // when
+        final int periodInMillis = TokenType.DELETE.getPeriodInMillis();
+
+        // then
+        assertThat(periodInMillis).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("DELETE 토큰의 기간이 초 단위로 반환된다")
+    void deleteTokenPeriodIsReturnedInSeconds() {
+        // when
+        final int periodInSeconds = TokenType.DELETE.getPeriodInSeconds();
+
+        // then
+        assertThat(periodInSeconds).isEqualTo(0);
+    }
 }

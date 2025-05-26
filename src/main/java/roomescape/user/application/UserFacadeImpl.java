@@ -10,12 +10,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class UserFacadeImpl implements UserFacade {
 
     private final UserQueryService userQueryService;
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserResponse> getAll() {
         return UserResponse.from(
                 userQueryService.getAll());

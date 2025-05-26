@@ -2,6 +2,7 @@ package roomescape.reservation.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import roomescape.auth.aop.ForbiddenException;
 import roomescape.auth.session.UserSession;
 import roomescape.reservation.application.dto.CreateReservationRequest;
@@ -33,6 +34,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     private final ThemeQueryService themeQueryService;
 
     @Override
+    @Transactional(readOnly = true)
     public List<ReservationResponse> getAll() {
         final List<Reservation> reservations = reservationQueryService.getAll();
         final List<UserId> userIds = reservations.stream()
@@ -44,6 +46,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ReservationResponse> getAllBySearchFilter(final ReservationSearchFilterRequest request) {
         final List<Reservation> reservations = reservationQueryService.getAllBySearchFilter(request);
         final List<UserId> userIds = reservations.stream()
@@ -55,11 +58,13 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SlotSequenceResponse> getAllSlotSequenceByUserId(final UserId userId) {
         return reservationQueryService.getAllSlotSequenceResponseByUserId(userId);
     }
 
     @Override
+    @Transactional
     public ReservationResponse create(final CreateReservationRequest request) {
         final TimeSlot timeSlot = timeSlotQueryService.get(request.timeId());
         final Theme theme = themeQueryService.get(request.themeId());
@@ -72,6 +77,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     @Override
+    @Transactional
     public void delete(final ReservationId id, final UserSession userSession) {
         final Reservation target = reservationQueryService.getById(id);
         if (userSession.canManage(target.getUserId())) {

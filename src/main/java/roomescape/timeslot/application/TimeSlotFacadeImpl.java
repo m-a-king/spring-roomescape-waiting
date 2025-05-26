@@ -13,25 +13,27 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class TimeSlotFacadeImpl implements TimeSlotFacade {
 
     private final TimeSlotQueryService timeSlotQueryService;
     private final TimeSlotCommandService timeSlotCommandService;
 
     @Override
+    @Transactional(readOnly = true)
     public List<TimeSlotResponse> getAll() {
         return TimeSlotResponse.from(
                 timeSlotQueryService.getAll());
     }
 
     @Override
+    @Transactional
     public TimeSlotResponse create(final CreateTimeSlotRequest request) {
         return TimeSlotResponse.from(
                 timeSlotCommandService.create(request));
     }
 
     @Override
+    @Transactional
     public void delete(final TimeSlotId id) {
         timeSlotCommandService.delete(id);
     }

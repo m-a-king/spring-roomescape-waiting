@@ -15,19 +15,20 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class ThemeFacadeImpl implements ThemeFacade {
 
     private final ThemeQueryService themeQueryService;
     private final ThemeCommandService themeCommandService;
 
     @Override
+    @Transactional(readOnly = true)
     public List<ThemeResponse> getAll() {
         return ThemeResponse.from(
                 themeQueryService.getAll());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ThemeResponse> getRanking() {
         final int count = 10;
         final int dateRange = 7;
@@ -42,12 +43,14 @@ public class ThemeFacadeImpl implements ThemeFacade {
     }
 
     @Override
+    @Transactional
     public ThemeResponse create(final CreateThemeRequest request) {
         return ThemeResponse.from(
                 themeCommandService.create(request));
     }
 
     @Override
+    @Transactional
     public void delete(final ThemeId id) {
         themeCommandService.delete(id);
     }

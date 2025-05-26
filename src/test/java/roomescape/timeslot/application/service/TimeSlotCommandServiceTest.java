@@ -31,15 +31,6 @@ class TimeSlotCommandServiceTest {
     @Autowired
     private TimeSlotRepository timeSlotRepository;
 
-    @Autowired
-    private ReservationRepository reservationRepository;
-
-    @Autowired
-    private ThemeRepository themeRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
     @Test
     @DisplayName("예약 시간을 생성할 수 있다")
     void createReservationTime() {

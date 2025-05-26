@@ -2,7 +2,6 @@ package roomescape.reservation.infrastructure;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import roomescape.reservation.domain.Reservation;
 import roomescape.reservation.infrastructure.projection.ReservationSequenceProjection;
@@ -10,9 +9,7 @@ import roomescape.user.domain.UserId;
 
 import java.util.List;
 
-public interface JpaReservationRepository
-        extends JpaRepository<Reservation, Long>,
-        QuerydslPredicateExecutor<Reservation> {
+public interface JpaReservationRepository extends JpaRepository<Reservation, Long> {
 
     List<Reservation> findAllByUserId(UserId userId);
 

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roomescape.common.domain.DomainTerm;
 import roomescape.common.exception.NotFoundException;
-import roomescape.reservation.application.dto.ThemeToBookCountResponse;
 import roomescape.reservation.application.service.ReservationQueryService;
 import roomescape.reservation.domain.ReservationDate;
 import roomescape.theme.domain.Theme;

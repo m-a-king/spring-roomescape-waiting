@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class TimeSlotCommandServiceTest {
 
     @Autowired
-    private ReservationTimeCommandService reservationTimeCommandService;
+    private TimeSlotCommandService timeSlotCommandService;
 
     @Autowired
     private TimeSlotRepository timeSlotRepository;
@@ -47,7 +47,7 @@ class TimeSlotCommandServiceTest {
         final CreateTimeSlotRequest request = new CreateTimeSlotRequest(ReservationTime.from(LocalTime.of(12, 30)));
 
         // when
-        final TimeSlot timeSlot = reservationTimeCommandService.create(request);
+        final TimeSlot timeSlot = timeSlotCommandService.create(request);
 
         // then
         assertThat(timeSlot.getStartAt().getValue()).isEqualTo(LocalTime.of(12, 30));
@@ -65,7 +65,7 @@ class TimeSlotCommandServiceTest {
         final TimeSlotId id = saved.getId();
 
         // when
-        reservationTimeCommandService.delete(id);
+        timeSlotCommandService.delete(id);
 
         // then
         assertThat(timeSlotRepository.findById(id)).isEmpty();
@@ -79,7 +79,7 @@ class TimeSlotCommandServiceTest {
 
         // when
         // then
-        assertThatThrownBy(() -> reservationTimeCommandService.delete(id))
+        assertThatThrownBy(() -> timeSlotCommandService.delete(id))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessage("[TIME_SLOT] not found. params={TimeSlotId=TimeSlotId(-1)}");
     }
@@ -95,7 +95,7 @@ class TimeSlotCommandServiceTest {
 
         // when
         // then
-        assertThatThrownBy(() -> reservationTimeCommandService.create(sameTimeRequest))
+        assertThatThrownBy(() -> timeSlotCommandService.create(sameTimeRequest))
                 .isInstanceOf(DuplicateException.class)
                 .hasMessage("TIME_SLOT already exists. params={ReservationTime=ReservationTime(value=14:00)}");
     }

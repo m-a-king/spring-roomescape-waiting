@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TimeSlotQueryServiceTest {
 
     @Autowired
-    private ReservationTimeQueryService reservationTimeQueryService;
+    private TimeSlotQueryService timeSlotQueryService;
 
     @Autowired
     private TimeSlotRepository timeSlotRepository;
@@ -34,7 +34,7 @@ class TimeSlotQueryServiceTest {
         final TimeSlotId id = savedTime.getId();
 
         // when
-        final TimeSlot timeSlot = reservationTimeQueryService.get(id);
+        final TimeSlot timeSlot = timeSlotQueryService.get(id);
 
         // then
         assertThat(timeSlot.getStartAt().getValue()).isEqualTo(time);
@@ -48,7 +48,7 @@ class TimeSlotQueryServiceTest {
         timeSlotRepository.save(TimeSlot.withoutId(ReservationTime.from(LocalTime.of(11, 0))));
 
         // when
-        final List<TimeSlot> times = reservationTimeQueryService.getAll();
+        final List<TimeSlot> times = timeSlotQueryService.getAll();
 
         // then
         assertThat(times).hasSize(2);

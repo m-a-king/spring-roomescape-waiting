@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roomescape.timeslot.application.dto.CreateTimeSlotRequest;
 import roomescape.timeslot.application.dto.TimeSlotResponse;
-import roomescape.timeslot.application.service.ReservationTimeCommandService;
-import roomescape.timeslot.application.service.ReservationTimeQueryService;
+import roomescape.timeslot.application.service.TimeSlotCommandService;
+import roomescape.timeslot.application.service.TimeSlotQueryService;
 import roomescape.timeslot.domain.TimeSlotId;
 
 import java.util.List;
@@ -16,23 +16,23 @@ import java.util.List;
 @Transactional
 public class TimeSlotFacadeImpl implements TimeSlotFacade {
 
-    private final ReservationTimeQueryService reservationTimeQueryService;
-    private final ReservationTimeCommandService reservationTimeCommandService;
+    private final TimeSlotQueryService timeSlotQueryService;
+    private final TimeSlotCommandService timeSlotCommandService;
 
     @Override
     public List<TimeSlotResponse> getAll() {
         return TimeSlotResponse.from(
-                reservationTimeQueryService.getAll());
+                timeSlotQueryService.getAll());
     }
 
     @Override
     public TimeSlotResponse create(final CreateTimeSlotRequest request) {
         return TimeSlotResponse.from(
-                reservationTimeCommandService.create(request));
+                timeSlotCommandService.create(request));
     }
 
     @Override
     public void delete(final TimeSlotId id) {
-        reservationTimeCommandService.delete(id);
+        timeSlotCommandService.delete(id);
     }
 }

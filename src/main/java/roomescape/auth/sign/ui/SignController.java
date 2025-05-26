@@ -37,7 +37,7 @@ public class SignController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<Long> create(@RequestBody final SignUpWebRequest request) {
+    public ResponseEntity<Long> signUp(@RequestBody final SignUpWebRequest request) {
         final Long userId = signFacade.signUp(request.toServiceRequest()).getValue();
 
         final URI location = ServletUriComponentsBuilder
@@ -50,7 +50,7 @@ public class SignController {
     }
 
     @PostMapping("/sign-out")
-    public ResponseEntity<Void> create(final HttpServletResponse httpServletResponse) {
+    public ResponseEntity<Void> signOut(final HttpServletResponse httpServletResponse) {
         signFacade.signOut(httpServletResponse::addCookie);
 
         return ResponseEntity.ok().build();

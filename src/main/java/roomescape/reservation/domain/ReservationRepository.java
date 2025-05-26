@@ -29,8 +29,8 @@ public interface ReservationRepository {
 
     List<Reservation> findAllByParams(UserId userId,
                                       ThemeId themeId,
-                                      ReservationDate reservationDate,
-                                      ReservationDate reservationDate1);
+                                      ReservationDate from,
+                                      ReservationDate to);
 
     List<ReservationIdWithSequenceResponse> findAllReservationSequencesByIds(final List<ReservationId> ids);
 

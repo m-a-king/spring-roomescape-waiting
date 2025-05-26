@@ -14,7 +14,7 @@ import roomescape.reservation.domain.Reservation;
 import roomescape.reservation.domain.ReservationId;
 import roomescape.theme.application.service.ThemeQueryService;
 import roomescape.theme.domain.Theme;
-import roomescape.timeslot.application.service.ReservationTimeQueryService;
+import roomescape.timeslot.application.service.TimeSlotQueryService;
 import roomescape.timeslot.domain.TimeSlot;
 import roomescape.user.application.service.UserQueryService;
 import roomescape.user.domain.User;
@@ -29,7 +29,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     private final ReservationQueryService reservationQueryService;
     private final ReservationCommandService reservationCommandService;
     private final UserQueryService userQueryService;
-    private final ReservationTimeQueryService reservationTimeQueryService;
+    private final TimeSlotQueryService timeSlotQueryService;
     private final ThemeQueryService themeQueryService;
 
     @Override
@@ -61,7 +61,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     @Override
     public ReservationResponse create(final CreateReservationRequest request) {
-        final TimeSlot timeSlot = reservationTimeQueryService.get(request.timeId());
+        final TimeSlot timeSlot = timeSlotQueryService.get(request.timeId());
         final Theme theme = themeQueryService.get(request.themeId());
 
         final Reservation reservation = reservationCommandService.create(

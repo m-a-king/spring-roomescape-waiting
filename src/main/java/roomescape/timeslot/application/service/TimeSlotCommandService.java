@@ -14,13 +14,13 @@ import roomescape.timeslot.domain.TimeSlotRepository;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ReservationTimeCommandService {
+public class TimeSlotCommandService {
 
     private final TimeSlotRepository timeSlotRepository;
-    private final ReservationTimeQueryService reservationTimeQueryService;
+    private final TimeSlotQueryService timeSlotQueryService;
 
     public TimeSlot create(final CreateTimeSlotRequest request) {
-        if (reservationTimeQueryService.existsByStartAt(request.startAt())) {
+        if (timeSlotQueryService.existsByStartAt(request.startAt())) {
             throw new DuplicateException(DomainTerm.TIME_SLOT, request.startAt());
         }
         return timeSlotRepository.save(
@@ -28,7 +28,7 @@ public class ReservationTimeCommandService {
     }
 
     public void delete(final TimeSlotId id) {
-        if (!reservationTimeQueryService.existById(id)) {
+        if (!timeSlotQueryService.existById(id)) {
             throw new NotFoundException(DomainTerm.TIME_SLOT, id);
         }
         timeSlotRepository.deleteById(id);

@@ -7,7 +7,6 @@ import java.time.Duration;
 @RequiredArgsConstructor
 public enum TokenType {
     ACCESS(Duration.ofMinutes(30)),
-    REFRESH(Duration.ofDays(7)),
 
     DELETE(Duration.ZERO),
     ;

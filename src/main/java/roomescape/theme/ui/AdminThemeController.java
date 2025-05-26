@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import roomescape.auth.aop.RequiredRoles;
 import roomescape.theme.application.ThemeFacade;
 import roomescape.theme.application.dto.ThemeResponse;
+import roomescape.theme.domain.ThemeId;
 import roomescape.theme.ui.dto.CreateThemeWebRequest;
 import roomescape.user.domain.UserRole;
 
@@ -41,7 +42,7 @@ public class AdminThemeController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable final Long id) {
-        themeFacade.delete(id);
+        themeFacade.delete(ThemeId.from(id));
         return ResponseEntity.noContent().build();
     }
 }

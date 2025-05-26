@@ -31,7 +31,7 @@ public record CreateReservationWebRequest(LocalDate date,
     }
 
     private void validate(final LocalDate date, final Long timeId, final Long themeId) {
-        Validator.of(CreateReservationWithUserIdWebRequest.class)
+        Validator.of(CreateReservationWebRequest.class)
                 .validateNotNull(Fields.date, date, DomainTerm.RESERVATION_DATE.label())
                 .validateNotNull(Fields.timeId, timeId, DomainTerm.TIME_SLOT_ID.label())
                 .validateNotNull(Fields.themeId, themeId, DomainTerm.THEME_ID.label());

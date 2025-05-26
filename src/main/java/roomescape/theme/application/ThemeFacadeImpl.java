@@ -48,7 +48,7 @@ public class ThemeFacadeImpl implements ThemeFacade {
     }
 
     @Override
-    public void delete(final Long id) {
-        themeCommandService.delete(ThemeId.from(id));
+    public void delete(final ThemeId id) {
+        themeCommandService.delete(id);
     }
 }

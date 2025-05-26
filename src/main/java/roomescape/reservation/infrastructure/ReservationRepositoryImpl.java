@@ -110,10 +110,10 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         if (themeId != null) {
             predicates.add(reservation.theme.id.eq(themeId.getValue()));
         }
-        if (from != null){
+        if (from != null) {
             predicates.add(reservation.date.value.goe(from.getValue()));
         }
-        if (to != null){
+        if (to != null) {
             predicates.add(reservation.date.value.loe(to.getValue()));
         }
 

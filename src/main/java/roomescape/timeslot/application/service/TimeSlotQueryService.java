@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ReservationTimeQueryService {
+public class TimeSlotQueryService {
 
     private final TimeSlotRepository timeSlotRepository;
 

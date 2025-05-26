@@ -9,7 +9,7 @@ import roomescape.auth.sign.application.dto.SignInResult;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class SignOutUseCase {
 
     public SignInResult execute() {
